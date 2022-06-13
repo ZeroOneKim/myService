@@ -10,6 +10,6 @@ public class CatController {
 
     @GetMapping("/catlist")
     public String list() {
-        return "/cat/catlist";
+        return "cat/catlist";
     }
 }
