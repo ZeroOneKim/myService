@@ -12,4 +12,6 @@ public class CatController {
     public String list() {
         return "cat/catlist";
     }
+
+
 }
