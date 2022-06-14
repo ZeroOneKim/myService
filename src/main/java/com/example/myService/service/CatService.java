@@ -30,5 +30,7 @@ public class CatService {
         return answer;
     }
 
-    private List<Cat> cat = catRepository.findAll();
+    public List<Cat> cat() {
+        return catRepository.findAll();
+    }
 }

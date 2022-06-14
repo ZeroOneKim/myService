@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,8 +19,16 @@ public class CatController {
     private CatService catService;
 
     @GetMapping("/catlist")
-    public String list(Cat cat, Model model, MultipartFile catfile) throws Exception {
-        catService.catwrite(cat, catfile);
+    public String catlist(Model model) {
+        model.addAttribute("cat", catService.cat());
         return "cat/catlist";
     }
+
+
+    @PostMapping("/catformpro")  //
+    public String catformpro(Cat cat, Model model, MultipartFile catfile) throws Exception {
+        catService.catwrite(cat, catfile);
+        return "redirect:/";
+    }
+
 }
