@@ -11,12 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/cat")
 public class CatController {
 
-    @Autowired
-    private CatRepository catRepository;
 
     @GetMapping("/catlist")
     public String list(Model model) {
-        catRepository.findAll();
         return "cat/catlist";
     }
 }
