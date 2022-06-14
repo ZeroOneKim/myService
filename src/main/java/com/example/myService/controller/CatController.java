@@ -1,7 +1,6 @@
 package com.example.myService.controller;
 
 import com.example.myService.entity.Cat;
-import com.example.myService.repository.CatRepository;
 import com.example.myService.service.CatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,12 +22,15 @@ public class CatController {
         model.addAttribute("cat", catService.cat());
         return "cat/catlist";
     }
-
+    @GetMapping("/catform")
+    public String catform(Model model) {
+        return "cat/catform";
+    }
 
     @PostMapping("/catformpro")  //
     public String catformpro(Cat cat, Model model, MultipartFile catfile) throws Exception {
         catService.catwrite(cat, catfile);
-        return "redirect:/";
+        return "redirect:/cat/catlist";
     }
 
 }

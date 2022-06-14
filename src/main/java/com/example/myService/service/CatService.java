@@ -13,21 +13,19 @@ import java.util.UUID;
 @Service
 public class CatService {
     @Autowired
-    public CatRepository catRepository;
-    public String catwrite(Cat cat, MultipartFile catfile) throws Exception {
+    private CatRepository catRepository;
+    public void catwrite(Cat cat, MultipartFile file) throws Exception {
         String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\catfiles";
         UUID uuid = UUID.randomUUID();
-        String filename = uuid + "_" + catfile.getOriginalFilename();
+        String filename = uuid + "_" + file.getOriginalFilename();
 
         File saveFile = new File(projectPath, filename);
-        catfile.transferTo(saveFile);
+        file.transferTo(saveFile);
 
         cat.setCat_filename(filename);
         cat.setCat_filepath("/catfiles/" + filename);
         catRepository.save(cat);
 
-        String answer = "작업 성공";
-        return answer;
     }
 
     public List<Cat> cat() {
