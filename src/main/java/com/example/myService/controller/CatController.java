@@ -37,7 +37,7 @@ public class CatController {
     }
 
     @GetMapping("/catview")
-    public String catView(Model model, @RequestParam(required = false ) Long id) {
+    public String catView(Model model, @RequestParam(required = false ) Long id) { //request 문법
         if (id==null) {
             model.addAttribute("cat", new Cat());
         } else {
@@ -47,4 +47,9 @@ public class CatController {
         return "/cat/catview";
     }
 
+    @PostMapping("/catformdel")
+    public String catformdelete(Long id) {
+        catService.catdelete(id);
+        return "/cat/catlist";
+    }
 }
