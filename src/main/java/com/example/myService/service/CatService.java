@@ -33,7 +33,7 @@ public class CatService {
     }
 
 
-    public void catdelete(Long id) {
+    public void catDelete(Long id) {
         catRepository.deleteById(id);
     }
 }

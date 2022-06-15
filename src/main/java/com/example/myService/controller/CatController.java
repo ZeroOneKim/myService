@@ -47,9 +47,9 @@ public class CatController {
         return "/cat/catview";
     }
 
-    @PostMapping("/catformdel")
-    public String catformdelete(Long id) {
-        catService.catdelete(id);
-        return "/cat/catlist";
+    @GetMapping("/catformdel")
+    public String catformdel(Long id) {
+        catService.catDelete(id);
+        return "redirect:/cat/catlist";
     }
 }
