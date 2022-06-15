@@ -31,4 +31,9 @@ public class CatService {
     public List<Cat> cat() {
         return catRepository.findAll();
     }
+
+
+    public void catdelete(Long id) {
+        catRepository.deleteById(id);
+    }
 }
