@@ -19,7 +19,7 @@ public class TimeTrafficAOP {
             long finish = System.currentTimeMillis();
             float timeMs = finish - start;
 
-            if (timeMs/1000>0.1) {
+            if (timeMs/1000>0.5) {
                 System.out.println("END : " + joinPoint.toString() + " " + timeMs / 1000 + "초___병목상태 의심!!!");
             }
         }
