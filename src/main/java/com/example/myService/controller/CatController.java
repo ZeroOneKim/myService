@@ -47,9 +47,9 @@ public class CatController {
         return "/cat/catview";
     }
 
-    @GetMapping("/catformdel")
-    public String catformdel(Long id) {
-        catService.catDelete(id);
+    @GetMapping("/catformdel") //오.. 쉬운기능은 혼자 코드짜도 완성이 되네..!?
+    public String catformdel(Long id, String filename){
+        catService.catDelete(id, filename);
         return "redirect:/cat/catlist";
     }
 }

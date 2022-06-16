@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,7 +37,16 @@ public class CatService {
     }
 
 
-    public void catDelete(Long id) {
-        catRepository.deleteById(id);
+    public void catDelete(Long id, String filename) {
+        catRepository.deleteById(id); //일단 DB 삭제
+        String deleteFile = System.getProperty("user.dir")+ "\\src\\main\\resources\\static\\catfiles\\"+filename;
+
+        try {
+            Files.delete(Path.of(deleteFile));
+        } catch (NoSuchFileException e) {
+            System.out.println("파일이 없음");
+        } catch (IOException e) {
+            throw new RuntimeException(e);  //자동완성기능 없었으면 구글링 했을듯
+        }
     }
 }
