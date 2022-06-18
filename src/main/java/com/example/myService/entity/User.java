@@ -1,6 +1,5 @@
 package com.example.myService.entity;
 
-
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,6 +15,7 @@ public class User {
 
     private String username;
     private String password;
+    private String nickname;
     private String email;
     private String phone;
 
@@ -27,5 +27,4 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
-
 }
