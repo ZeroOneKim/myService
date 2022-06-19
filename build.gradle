@@ -27,7 +27,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.security:spring-security-test' //test 는 대문자 I 로 쓴다?
 }
 
 tasks.named('test') {
