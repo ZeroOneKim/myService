@@ -3,6 +3,9 @@ package com.example.myService.service;
 import com.example.myService.entity.Cat;
 import com.example.myService.repository.CatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,9 +34,9 @@ public class CatService {
         catRepository.save(cat);
 
     }
+    public Page<Cat> cat(Pageable pageable) {
+        return catRepository.findAll(pageable);
 
-    public List<Cat> cat() {
-        return catRepository.findAll();
     }
 
 

@@ -4,6 +4,8 @@ import com.example.myService.entity.Cat;
 import com.example.myService.repository.CatRepository;
 import com.example.myService.service.CatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +23,17 @@ public class CatController {
     private CatService catService;
 
     @GetMapping("/catlist")
-    public String catlist(Model model) {
-        model.addAttribute("cat", catService.cat());
+    public String catlist(Model model,@PageableDefault(size = 6) Pageable pageable) {
+        model.addAttribute("cat", catService.cat(pageable));
+
+        int startPage = 1;
+        int endPage = catService.cat(pageable).getTotalPages();
+        int nowPage = catService.cat(pageable).getPageable().getPageNumber();
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("nowPage", nowPage);
+        System.out.println(nowPage);
+
         return "cat/catlist";
     }
     @GetMapping("/catform")
