@@ -45,8 +45,8 @@ public class CatController {
     @PostMapping("/catformpro")  //
     public String catformpro(Cat cat, Model model, MultipartFile catfile, Authentication authentication)
             throws Exception {
-        String nickname = authentication.getName();
-        catService.catwrite(cat, catfile, nickname);
+        String username = authentication.getName();
+        catService.catwrite(cat, catfile, username);
         return "redirect:/cat/catlist";
     }
 

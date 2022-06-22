@@ -1,7 +1,9 @@
 package com.example.myService.service;
 
 import com.example.myService.entity.Cat;
+import com.example.myService.entity.User;
 import com.example.myService.repository.CatRepository;
+import com.example.myService.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +25,8 @@ import java.util.UUID;
 public class CatService {
     @Autowired
     private CatRepository catRepository;
+    @Autowired
+    private UserRepository userRepository;
     public void catwrite(Cat cat, MultipartFile file, String username) throws Exception {
         String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\catfiles";
         UUID uuid = UUID.randomUUID();
@@ -33,6 +37,8 @@ public class CatService {
         cat.setCat_filename(filename);
         cat.setCat_filepath("/catfiles/" + filename);
 
+        User user = userRepository.findByUsername(username);
+        cat.setUser(user);
         catRepository.save(cat);
 
     }
