@@ -1,8 +1,10 @@
 package com.example.myService.entity;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    /*@NotNull
+    @Size(min=4, max=20)*/
     private String username;
     private String password;
     private String nickname;
