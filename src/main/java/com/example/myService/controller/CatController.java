@@ -6,6 +6,7 @@ import com.example.myService.service.CatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +26,14 @@ public class CatController {
     @GetMapping("/catlist")
     public String catlist(Model model,@PageableDefault(size = 6) Pageable pageable) {
         model.addAttribute("cat", catService.cat(pageable));
-
+        String writer = "작성자 : ";
+        model.addAttribute("writer", writer);
         int startPage = 1;
         int endPage = catService.cat(pageable).getTotalPages();
         int nowPage = catService.cat(pageable).getPageable().getPageNumber();
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("nowPage", nowPage);
-        System.out.println(nowPage);
 
         return "cat/catlist";
     }
@@ -42,8 +43,10 @@ public class CatController {
     }
 
     @PostMapping("/catformpro")  //
-    public String catformpro(Cat cat, Model model, MultipartFile catfile) throws Exception {
-        catService.catwrite(cat, catfile);
+    public String catformpro(Cat cat, Model model, MultipartFile catfile, Authentication authentication)
+            throws Exception {
+        String nickname = authentication.getName();
+        catService.catwrite(cat, catfile, nickname);
         return "redirect:/cat/catlist";
     }
 
