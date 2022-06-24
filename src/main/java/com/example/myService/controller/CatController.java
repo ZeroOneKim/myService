@@ -6,6 +6,7 @@ import com.example.myService.service.CatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,7 +62,8 @@ public class CatController {
         return "/cat/catview";
     }
 
-    @GetMapping("/catformdel") //오.. 쉬운기능은 혼자 코드짜도 완성이 되네..!?
+    @Secured("ROLE_ADMIN")  //2중 권한
+    @GetMapping("/catformdel")
     public String catformdel(Long id, String filename){
         catService.catDelete(id, filename);
         return "redirect:/cat/catlist";

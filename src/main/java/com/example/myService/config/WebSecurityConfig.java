@@ -19,8 +19,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private DataSource dataSource; //application properties 내용을 사용가능하게.
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
         http
+                .csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/", "/account/login", "/accountcss/**", "/account/register", "/api/**").permitAll()
                     .anyRequest().authenticated()  //페이지를 login 하나로만 쓰더라도 POST 방식에 대한 권한을 줘야한다..이 에러로 하루가 지나갔다..
