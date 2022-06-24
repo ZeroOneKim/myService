@@ -3,6 +3,7 @@ package com.example.myService.controller.restapi;
 import com.example.myService.entity.Cat;
 import com.example.myService.repository.CatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;          //아직 미구현 ㅠㅠ...
