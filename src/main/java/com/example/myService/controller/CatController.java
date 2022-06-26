@@ -43,13 +43,6 @@ public class CatController {
         return "cat/catform";
     }
 
-    @PostMapping("/catformpro")  //
-    public String catformpro(Cat cat, Model model, MultipartFile catfile, Authentication authentication)
-            throws Exception {
-        String username = authentication.getName();
-        catService.catwrite(cat, catfile, username);
-        return "redirect:/cat/catlist";
-    }
 
     @GetMapping("/catview")
     public String catView(Model model, @RequestParam(required = false ) Long id) { //request 문법
@@ -62,10 +55,4 @@ public class CatController {
         return "/cat/catview";
     }
 
-    @Secured("ROLE_ADMIN")  //2중 권한
-    @GetMapping("/catformdel")
-    public String catformdel(Long id, String filename){
-        catService.catDelete(id, filename);
-        return "redirect:/cat/catlist";
-    }
 }
