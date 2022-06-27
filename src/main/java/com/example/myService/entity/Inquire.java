@@ -14,10 +14,10 @@ public class Inquire {
     // user FK
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User user_id;
 
     // cat FK
     @ManyToOne
     @JoinColumn(name = "cat_id")
-    private Cat cat;
+    private Cat cat_id;
 }

@@ -1,14 +1,17 @@
 package com.example.myService.controller;
 
 import com.example.myService.entity.Cat;
+import com.example.myService.entity.Inquire;
 import com.example.myService.entity.User;
 import com.example.myService.repository.CatRepository;
+import com.example.myService.repository.UserRepository;
 import com.example.myService.service.CatService;
 import com.example.myService.service.InquireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +19,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/cat")
 public class CatController {
     @Autowired
     private CatRepository catRepository;
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private CatService catService;
     @Autowired
@@ -58,9 +65,9 @@ public class CatController {
     }
 
     @PostMapping("/catinquire")
-    public String catinquire(Long cat_id, Model model, Authentication authentication) {
+    public String catinquire(@Valid Inquire inquire, Cat cat_id, Authentication authentication) {
         String username = authentication.getName();
-        inquireService.inquirereserve(cat_id, username);
+        inquireService.inquirereserve(inquire, cat_id, username);
         return "redirect:/cat/catlist";
     }
 }
