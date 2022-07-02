@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Inquire {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long inquire_id;
+    private Long inquire;
 
     // user FK
     @ManyToOne
