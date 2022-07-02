@@ -40,8 +40,15 @@ public class CatService {
         User user = userRepository.findByUsername(username);
         cat.setUser(user);
         catRepository.save(cat);
+    }
+    public void update(Cat cat, String username) throws Exception {
+        User user = userRepository.findByUsername(username);
+
+        cat.setUser(user);
+        catRepository.save(cat);
 
     }
+
     public Page<Cat> cat(Pageable pageable) {
         return catRepository.findAll(pageable);
 

@@ -10,11 +10,10 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Secured("ROLE_ADMIN")
 @Controller
@@ -48,11 +47,33 @@ public class AdminController {
     public String catform(Model model) {
         return "/admin/cat/catform";
     }
+    @GetMapping("/cat/catreform")
+    public String catreform(Model model, @RequestParam(required = false) Long id)
+    {
+        if (id==null) {
+            return "redirect:/admin/home";
+        }
+        Cat cat = catRepository.findById(id).orElse(null);
+        model.addAttribute("cat", cat);
+        return "/admin/cat/catreform";
+    }
+    @PostMapping("/cat/update")
+    public String catupdate(Cat cat, Model model, Authentication authentication, String filename)
+            throws Exception{
+        System.out.println(filename);
+        String username = authentication.getName();
+        catService.update(cat,username);
+
+        return "redirect:/admin/cat/catlist";
+    }
+
+
     @PostMapping("/cat/catformpro")  //
     public String catformpro(Cat cat, Model model, MultipartFile catfile, Authentication authentication)
             throws Exception {
         String username = authentication.getName();
         catService.catwrite(cat, catfile, username);
+        System.out.println(catfile+"  입력");
         return "redirect:/admin/cat/catlist";
     }
 
