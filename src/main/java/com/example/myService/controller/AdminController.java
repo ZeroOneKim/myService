@@ -1,8 +1,11 @@
 package com.example.myService.controller;
 
 import com.example.myService.entity.Cat;
+import com.example.myService.entity.Dog;
 import com.example.myService.repository.CatRepository;
+import com.example.myService.repository.DogRepository;
 import com.example.myService.service.CatService;
+import com.example.myService.service.DogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -23,6 +26,10 @@ public class AdminController {
     private CatService catService;
     @Autowired
     private CatRepository catRepository;
+    @Autowired
+    private DogService dogService;
+    @Autowired
+    private DogRepository dogRepository;
 
     @GetMapping("/home")
     public String adminhome() {
@@ -92,6 +99,55 @@ public class AdminController {
     public String catformdel(Long id, String filename){
         catService.catDelete(id, filename);
         return "redirect:/admin/cat/catlist";
+    }
+
+    // 여기부터 강아지 ********************************************************************
+
+    @GetMapping("/dog/doglist")
+    public String doglist(Model model, @PageableDefault(size = 6) Pageable pagealbe) {
+        model.addAttribute("dog", dogService.dog(pagealbe));
+        String writer = "작성자 : ";
+        model.addAttribute("writer", writer);
+        int startPage = 1;
+        int endPage = dogService.dog(pagealbe).getTotalPages();
+        int nowPage = dogService.dog(pagealbe).getPageable().getPageNumber();
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("nowPage", nowPage);
+        return "/admin/dog/doglist";
+    }
+
+
+    @GetMapping("/dog/dogform")
+    public String dogform(Model model) {
+        return "/admin/dog/dogform";
+    }
+
+    @PostMapping("/dog/dogformpro")  //
+    public String dogformpro(Dog dog, Model model, MultipartFile dogfile, Authentication authentication)
+            throws Exception {
+        String username = authentication.getName();
+        dogService.dogwrite(dog, dogfile, username);
+
+        return "redirect:/admin/dog/doglist";
+    }
+
+    @GetMapping("/dog/dogview")
+    public String dogview(Model model, @RequestParam(required = false) Long id) {
+        if(id ==null) {
+            model.addAttribute("dog", new Dog());
+        } else {
+            Dog dog = dogRepository.findById(id).orElse(null);
+            model.addAttribute("dog", dog);
+        }
+        return "/admin/dog/dogview";
+    }
+
+    @GetMapping("/dog/dogDelete")
+    public String dogDelete(Long id, String filename) {
+        dogService.dogDelete(id, filename);
+        System.out.println(id);
+        return "redirect:/admin/dog/doglist";
     }
 }
 
