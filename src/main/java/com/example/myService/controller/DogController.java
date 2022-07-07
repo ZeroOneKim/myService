@@ -26,13 +26,10 @@ public class DogController {
     private UserRepository userRepository;
     @Autowired
     private DogService dogService;
-    @Autowired
-    private Inquire inquire;
-
     @GetMapping("/doglist")
     public String doglist(Model model, @PageableDefault(size = 6) Pageable pagealbe) {
         model.addAttribute("dog", dogService.dog(pagealbe));
-        String writer = "작성자";
+        String writer = "작성자 : ";
         int startPage = 1;
         model.addAttribute("writer", writer);
         int endPage = dogService.dog(pagealbe).getTotalPages();
@@ -55,8 +52,8 @@ public class DogController {
         return "dog/dogview";
     }
 
-    @PostMapping("/doginquire")  //보류
+    /*@PostMapping("/doginquire")  //보류
     public String dogView(@Valid Inquire inquire) {
         return "redirect:/dog/doglist";
-    }
+    }*/
 }
