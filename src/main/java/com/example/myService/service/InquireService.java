@@ -1,6 +1,7 @@
 package com.example.myService.service;
 
 import com.example.myService.entity.Cat;
+import com.example.myService.entity.Dog;
 import com.example.myService.entity.Inquire;
 import com.example.myService.entity.User;
 import com.example.myService.repository.CatRepository;
@@ -23,6 +24,13 @@ public class InquireService {
         User user = userRepository.findByUsername(username);
         inquire.setUser_id(user);
         inquire.setCat_id(cat_id);
+        inquireRepository.save(inquire);
+    }
+    public void inquirereserving(Inquire inquire , Dog dog_id, String username) {
+
+        User user = userRepository.findByUsername(username);
+        inquire.setUser_id(user);
+        inquire.setDog_id(dog_id);
         inquireRepository.save(inquire);
     }
 }

@@ -20,4 +20,8 @@ public class Inquire {
     @ManyToOne
     @JoinColumn(name = "cat_id")
     private Cat cat_id;
+
+    @ManyToOne
+    @JoinColumn(name = "dog_id")
+    private Dog dog_id;
 }

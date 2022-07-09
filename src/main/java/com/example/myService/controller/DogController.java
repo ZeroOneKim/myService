@@ -5,9 +5,11 @@ import com.example.myService.entity.Inquire;
 import com.example.myService.repository.DogRepository;
 import com.example.myService.repository.UserRepository;
 import com.example.myService.service.DogService;
+import com.example.myService.service.InquireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,8 @@ public class DogController {
     private UserRepository userRepository;
     @Autowired
     private DogService dogService;
+    @Autowired
+    private InquireService inquireService;
     @GetMapping("/doglist")
     public String doglist(Model model, @PageableDefault(size = 6) Pageable pagealbe) {
         model.addAttribute("dog", dogService.dog(pagealbe));
@@ -52,8 +56,10 @@ public class DogController {
         return "dog/dogview";
     }
 
-    /*@PostMapping("/doginquire")  //보류
-    public String dogView(@Valid Inquire inquire) {
+    @PostMapping("/doginquire")  //보류
+    public String dogView(@Valid Inquire inquire, Dog dog_id, Authentication authentication) {
+        String username = authentication.getName();
+        inquireService.inquirereserving(inquire, dog_id, username);
         return "redirect:/dog/doglist";
-    }*/
+    }
 }

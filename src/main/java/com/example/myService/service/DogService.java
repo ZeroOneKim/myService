@@ -1,5 +1,6 @@
 package com.example.myService.service;
 
+import com.example.myService.entity.Cat;
 import com.example.myService.entity.Dog;
 import com.example.myService.entity.User;
 import com.example.myService.repository.DogRepository;
@@ -25,19 +26,20 @@ public class DogService {
     private UserRepository userRepository;
 
     public void dogwrite(Dog dog, MultipartFile multipartFile, String username) throws Exception {
-        String justPath = System.getProperty("user.dir") + "\\src\\main\\resources\\main\\dogfiles";
+        String justPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\dogfiles";
         UUID randomName = UUID.randomUUID();
         String filename = randomName + "_" + multipartFile.getOriginalFilename();
 
         File saveFile = new File(justPath, filename);
         multipartFile.transferTo(saveFile);
         dog.setDog_filename(filename);
-        dog.setDog_filepath("/dogflies/" + filename);
+        dog.setDog_filepath("/dogfiles/" + filename);
 
         User user = userRepository.findByUsername(username);
         dog.setUser(user);
         dogRepository.save(dog);
     }
+
 
     public Page<Dog> dog(Pageable pagealbe) {
         return dogRepository.findAll(pagealbe);
@@ -53,6 +55,12 @@ public class DogService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void dogUpdate(Dog dog, String username) {
+        User user = userRepository.findByUsername(username);
+        dog.setUser(user);
+        dogRepository.save(dog);
     }
 
 }
