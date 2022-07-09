@@ -16,8 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
 @Secured("ROLE_ADMIN")
 @Controller
 @RequestMapping("/admin")
@@ -55,8 +53,7 @@ public class AdminController {
         return "/admin/cat/catform";
     }
     @GetMapping("/cat/catreform")
-    public String catreform(Model model, @RequestParam(required = false) Long id)
-    {
+    public String catreform(Model model, @RequestParam(required = false) Long id) {
         if (id==null) {
             return "redirect:/admin/home";
         }
@@ -67,7 +64,7 @@ public class AdminController {
     @PostMapping("/cat/update")
     public String catupdate(Cat cat, Model model, Authentication authentication, String filename)
             throws Exception{
-        System.out.println(filename);
+        System.out.println(cat);
         String username = authentication.getName();
         catService.update(cat,username);
 
@@ -134,20 +131,34 @@ public class AdminController {
 
     @GetMapping("/dog/dogview")
     public String dogview(Model model, @RequestParam(required = false) Long id) {
-        if(id ==null) {
-            model.addAttribute("dog", new Dog());
-        } else {
-            Dog dog = dogRepository.findById(id).orElse(null);
-            model.addAttribute("dog", dog);
+        if (id==null) {
+            return "redirect:/admin/home";
         }
+        Dog dog = dogRepository.findById(id).orElse(null);
+        model.addAttribute("dog", dog);
         return "/admin/dog/dogview";
     }
 
     @GetMapping("/dog/dogDelete")
     public String dogDelete(Long id, String filename) {
         dogService.dogDelete(id, filename);
-        System.out.println(id);
         return "redirect:/admin/dog/doglist";
     }
+    @GetMapping("/dog/dogupdate")
+    public String updatePage(Model model,  @RequestParam(required = false) Long id){
+        if (id!=null) {
+            Dog dog = dogRepository.findById(id).orElse(null);
+            model.addAttribute("dog", dog);
+        } else return "redirect:/admin/home";
+        return "/admin/dog/dogupdate";
+    }
+
+    @PostMapping("/dog/updateprocess")
+    public String dogupdate(Dog dog, Model model, Authentication authentication) {
+        String username = authentication.getName();
+        dogService.dogUpdate(dog, username);
+        return "redirect:/admin/dog/doglist";
+    }
+
 }
 
