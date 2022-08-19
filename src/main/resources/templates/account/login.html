@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}"> Animal </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#712cf9">
+    <link href="login.css" th:href="@{/accountcss/login.css}" rel="stylesheet" >
+</head>
+
+<body>                    <!--BODY 부분-->
+<header th:replace="fragments/common :: header">
+</header>
+
+<main><br><br>
+    <div class="login-wrap">
+        <div class="login-html">
+            <input  id="spring-login" type="radio" name="tab" class="sign-in" checked>
+            <label for="spring-login" class="tab">Sign In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up">
+            <label for="tab-2" class="tab">Sign Up</label>
+            <div class="login-form">
+                <form th:action="@{/account/login}" method="post" >
+                <div class="sign-in-htm">
+                    <div class="group">
+                        <label for="username" class="label">ID</label>
+                        <input id="username" type="text" name="username" class="input">
+                    </div>
+                    <div class="group">
+                        <label for="password" class="label">Password</label>
+                        <input id="password" type="password" name=password class="input">
+                    </div><br><br>
+                        <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                            Invalid username and password.
+                        </div>
+                        <div th:if="${param.logout}" class="alert alert-primary" role="alert">
+                            로그아웃 되었습니다.
+                        </div>
+
+                    <div class="group">
+                        <input type="submit" class="button" value="로그인">
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        &emsp;맞아요, 서비스를 이용하려면 로그인해야해요..&emsp;
+                    </div>
+                </div>
+                </form>
+                    <div class="sign-up-htm">
+                        <form th:action="@{/account/register}"  method="post">
+                        <div class="group">
+                            <label for="username2" class="label">ID</label>
+                            <input id="username2" type="text" name="username" class="input">
+                            <!--<div class="invalid-feedback" th:if="${#name.hasErrors('username')}" th:errors="">
+                                ssssssssssssss
+                            </div>-->
+                        </div>
+                        <div class="group">
+                            <label for="password2" class="label">Password</label>
+                            <input id="password2" type="password" name="password" class="input" >
+                        </div>
+                        <div class="group">
+                            <label for="nickname" class="label">Nickname</label>
+                            <input id="nickname" type="text" name="nickname" class="input">
+                        </div>
+                        <div class="group">
+                            <label for="Email" class="label">Email Address</label>
+                            <input id="Email" type="text" name="email" class="input">
+                        </div>
+                        <div class="group">
+                            <label for="Phone" class="label">핸드폰 번호</label>
+                            <input id="Phone" type="text" name="phone" class="input">
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button" value="회원 가입">
+                        </div>
+                        </form>
+                        <div class="hr"></div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</main><br><br>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+<!--<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>-->
+</body>
+</html>

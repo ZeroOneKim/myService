@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}"> Animal </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#712cf9">
+
+</head>
+<body>                    <!--BODY 부분-->
+
+<header th:replace="fragments/common :: header">                   <!--**********헤더 부분**********-->
+
+</header>
+
+
+
+
+
+
+
+
+<main>  <!--종 나이 성별 접좀여부 중성화여부 특이사항 // 파일명 파일 경로-->
+    <div class="position-relative">
+        <div class="position-absolute top-0 start-50 translate-middle"></div>
+
+    <div class="col-md-7 col-lg-8">
+        <p><h4 class="mb-3"><strong>고양이 정보 입력 란</strong></h4></p>
+        <form class="needs-validation" novalidate action="/admin/cat/catformpro" method="post" enctype="multipart/form-data">
+            <div class="row g-5">
+            <div class="col-sm-5">
+              <label for="cat_species" class="form-label">묘종</label>
+              <select class="form-select" id="cat_species" name="cat_species"  required>
+                <option value="믹스" >믹스</option>
+                <option value="먼치킨">먼치킨</option>
+                  <option value="랙돌">랙돌</option>
+                  <option value="아메리칸 숏헤어">아메리칸 숏헤어</option>
+                  <option value="페르시안">페르시안</option>
+              </select>
+            </div>
+            
+            <div class="col-sm-5">
+              <label for="cat_age" class="form-label">나이</label>
+              <input type="text" class="form-control" id="cat_age" name="cat_age" placeholder=""  required>
+            </div>
+
+            <div class="col-3">
+              <label for="cat_wm" class="form-label"> 성별 </label>
+              <select class="form-select" id="cat_wm" name="cat_wm" required>
+                <option value="암컷">암컷</option>
+                <option value="수컷">수컷</option>
+              </select>
+            </div>
+
+            <div class="col-3">
+                <label for="cat_vaccine" class="form-label"> 접종여부 </label>
+                <select class="form-select" id="cat_vaccine" name="cat_vaccine" required>
+                    <option value="미완료">미완료</option>
+                    <option value="완료">완료</option>
+                  </select>
+            </div>
+
+            <div class="col-3">
+              <label for="cat_neutral" class="form-label">중성화 여부</label>
+              <select class="form-select" id="cat_neutral" name="cat_neutral" required>
+                <option value="미완료">미완료 </option>
+                <option value="완료">완료</option>
+              </select>
+            </div>
+
+            <input type = file  name="catfile">
+            
+            <div class="mb-0">
+                <label for="cat_about" class="form-label">특이사항</label>
+                <textarea class="form-control" id="cat_about" name="cat_about" rows="3"></textarea>
+            </div>
+          <button class="w-25 btn btn-primary btn-lg" type="submit">작성하기</button>
+          </div>
+        </form>
+      </div>
+    
+      </div>
+    </div>
+  </main> <br><br>
+
+
+
+
+
+<hr>
+<footer class="text-muted py-5" th:fragment="tail">
+    
+    <div class="container">
+        <p class="float-end mb-1">
+            <a href="#">맨위로</a>
+        </p>
+        <p class="mb-1">인덕대학교 전공심화 4학년 - 김영일</p>
+        <p class="mb-0">전화번호 : 010-4746-8733 </p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>
