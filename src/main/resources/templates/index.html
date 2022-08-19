@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymleaf.org">
+<html lang="en" xmlns:th="http://www.thymleaf.org" xmlns:sec="http://www.thymleaf.org/extras/spring-security">
 
 <head th:replace="fragments/common :: head('Home')">
 </head>
@@ -9,14 +9,14 @@
 </header>
 
 <main>
+    <a th:href="@{/admin/home}" sec:authorize="hasRole('ROLE_ADMIN')">관리자 페이지</a>
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Content</h1>
-                <p class="lead text-muted">content2...........................Blah Blah</p>
+                <p class="lead text-muted">애완동물 입양에 관심이 있으신가요?</p>
                 <p>
-                    <a href="#" class="btn btn-primary my-2">Main call to action</a>
-                    <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+                    <a href="#" th:href="@{/cat/catlist}" class="btn btn-primary my-2">고양이 보러가기</a>
+                    <a href="#" th:href="@{/dog/doglist}" class="btn btn-secondary my-2">강아지 보러가기</a>
                 </p>
             </div>
         </div>
@@ -25,23 +25,18 @@
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-                Hi
-
+                <img src="/accountcss/Problem.PNG">
+                <br>강아지는 평균 60IQ, 고양이는 평균 50IQ를 가집니다. 고양이는 학습능력을 가지고,<br>
+                고양이는 문제해결능력을 가집니다. 물론 슬픔과 기쁨도 느끼는 아이들인데 인간이 막 대할<br>
+                 수 있을까요?
+                <br>매년 유기동물이 늘어남에 따라서, 양심적으로 유기동물들을 보호해주고 입양까지 도와주는 업체가 있었으면 좋겠습니다.
             </div>
         </div>
     </div>
 
 </main>
 
-<footer class="text-muted py-5">
-    <div class="container">
-        <p class="float-end mb-1">
-            <a href="#">맨위로</a>
-        </p>
-        <p class="mb-1">인덕대학교 전공심화 4학년 - 김영일</p>
-        <p class="mb-0">전화번호 : 010-4746-8733 </p>
-    </div>
+<footer class="text-muted py-5" th:replace="fragments/common :: tail">
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
