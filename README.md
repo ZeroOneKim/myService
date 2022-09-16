@@ -1,7 +1,7 @@
 # 제목 - Animal Love
 버려지는 반려동물들을 입양할 수 있게 도와주는 사이트<br>
 서비스 DNS - (오픈기간:미정)  <br>
-시연영상 - Not yet
+시연영상 - https://www.youtube.com/watch?v=2i9dDRvADAo
 
 ## DB
 ![myservice database](https://user-images.githubusercontent.com/83469080/183641328-f0eec91e-42c2-4d13-8c5c-5d666a9109ac.PNG)
