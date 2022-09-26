@@ -1,6 +1,6 @@
 # 제목 - Animal Love
 버려지는 반려동물들을 입양할 수 있게 도와주는 사이트<br>
-서비스 DNS - (오픈기간:미정)  <br>
+서비스 - http://211.176.170.182 (10-16일까지 오픈)  <br>
 시연영상 - https://www.youtube.com/watch?v=2i9dDRvADAo
 
 ## DB
